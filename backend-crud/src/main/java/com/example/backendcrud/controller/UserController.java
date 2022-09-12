@@ -58,7 +58,7 @@ public class UserController {
         }
 
         response.put("user", user);
-        return   new ResponseEntity<Map<String , Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return   new ResponseEntity<Map<String , Object>>(response, HttpStatus.OK);
     }
 
     @PostMapping("/user")
@@ -90,7 +90,7 @@ public class UserController {
             if (userActual == null){
                 response.put("mensaje" , "Error no existe es usuario");
                 response.put("error", "No se encuentra en la base de datos");
-                return new ResponseEntity<Map<String , Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<Map<String , Object>>(response, HttpStatus.ACCEPTED);
             }
 
             userActual.setEmail(user.getEmail());
