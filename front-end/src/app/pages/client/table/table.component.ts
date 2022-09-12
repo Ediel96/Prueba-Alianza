@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, Output, OnChanges, OnInit, SimpleChanges, ViewChild,  EventEmitter } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
@@ -13,9 +13,9 @@ import { User } from 'src/app/shared/models/User';
 export class TableComponent implements OnInit, OnChanges {
 
   @Input() user! : User[];
+  @Output() userEdit = new EventEmitter<any>();
 
-
-  displayedColumns: string[] = ['sharedKey', 'businessId', 'email', 'phone' , 'dateStart' , 'dateEnd'];
+  displayedColumns: string[] = ['sharedKey', 'businessId', 'email', 'phone' , 'dateStart' , 'dateEnd', 'edit'];
   dataSource: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -43,6 +43,10 @@ export class TableComponent implements OnInit, OnChanges {
     if (this.dataSource!.paginator) {
       this.dataSource!.paginator.firstPage();
     }
+  }
+
+  clientEdit(row : any){
+    this.userEdit.emit(row); 
   }
 
 }

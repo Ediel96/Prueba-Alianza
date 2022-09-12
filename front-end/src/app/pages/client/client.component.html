@@ -4,4 +4,4 @@
 <button mat-raised-button color="primary" (click)="openDialog()">New</button>
 <button mat-raised-button color="primary">Export</button>
 
-<app-table [user]="listUser"></app-table>
+<app-table [user]="listUser" (userEdit)="addItem($event)" ></app-table>

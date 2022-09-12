@@ -1,19 +1,39 @@
-<h1 mat-dialog-title *ngIf="" >Hi {{data.name}}</h1>
 <div mat-dialog-content>
-    <mat-form-field appearance="fill" style="width: 90%;">
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="data.animal">
-    </mat-form-field>
-    <mat-form-field appearance="fill" style="width: 90%;">
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="data.animal">
-    </mat-form-field>
-    <mat-form-field appearance="fill" style="width: 90%;">
-        <mat-label>Favorite Animal</mat-label>
-        <input matInput [(ngModel)]="data.animal">
-    </mat-form-field>
+    <h1>Create New Client</h1>
+        
+    <form [formGroup]="formGroup" class="form">
+        <mat-form-field appearance="fill" style="width: 90%;">
+            <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" style="width: 90%;">
+            <input matInput placeholder="Phone" formControlName="phone">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 90%;">
+            <input matInput placeholder="E-mail" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 90%;">
+            <input matInput placeholder="Business ID" formControlName="businessId">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 90%;">
+            <input matInput [matDatepicker] = "dateStart" placeholder = "Choose a date" formControlName="dateStart">
+            <mat-datepicker-toggle matSuffix [for] = "dateStart"></mat-datepicker-toggle>
+            <mat-datepicker #dateStart></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" style="width: 90%;">
+            <input matInput [matDatepicker] = "dateEnd" placeholder = "Choose a date" formControlName="dateEnd">
+            <mat-datepicker-toggle matSuffix [for] = "dateEnd"></mat-datepicker-toggle>
+            <mat-datepicker #dateEnd></mat-datepicker>
+        </mat-form-field>
+
+    </form>
+    
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button  cdkFocusInitial>Ok</button>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button  cdkFocusInitial (click)="creatPost()">Ok</button>
 </div>

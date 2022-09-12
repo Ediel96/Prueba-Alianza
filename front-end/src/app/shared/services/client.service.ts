@@ -3,6 +3,7 @@ import { Observable, throwError, of } from 'rxjs';
 
 import { HttpClient,  HttpEvent,  HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { User } from '../models/User';
 
 
 @Injectable({
@@ -26,6 +27,12 @@ export class ClientService {
   }
 
   getLlistaClients () : Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8080/api/user' , { headers: this.agregaAuthorizationHeader() });
+    return this.http.get<any[]>(this.urlEndPoint , { headers: this.agregaAuthorizationHeader() });
   }
+
+  postClient(user : any){
+    return this.http.post(this.urlEndPoint, user, { headers: this.agregaAuthorizationHeader() });
+  }
+
+  
 }
