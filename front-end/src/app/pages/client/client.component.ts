@@ -6,10 +6,6 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { TitleStrategy } from '@angular/router';
 import { __values } from 'tslib';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-client',
@@ -22,6 +18,7 @@ export class ClientComponent implements OnInit, OnChanges {
   listUser!: User[]; 
   animal!: string;
   name!: string;
+  user! : User;
   
 
   constructor(private clientService : ClientService, public dialog: MatDialog) { }
@@ -53,7 +50,7 @@ export class ClientComponent implements OnInit, OnChanges {
   openDialog(){
     const dialogRef = this.dialog.open(DialogModal, {
       width: '750px',
-      data: {name: this.name, animal: this.animal},
+      data: this.user,
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -83,9 +80,9 @@ export class DialogModal implements OnChanges, OnInit{
 
 
   ngOnInit(): void {
-    console.log(this.data);
     this.createForm();
     if(this.data != null){
+      console.log(this.data);
       this.editForm(this.data)
     }
   }
@@ -114,41 +111,59 @@ export class DialogModal implements OnChanges, OnInit{
 
 
   ngOnChanges(): void {
-    console.log(this.data);
+    console.log('ngOnChanges: ',this.data);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-
   emitirClienteComponent(){
     this.emitirClienteComponent()
   }
   
-
-  
   creatPost(){
     this.formGroup.value;
-    console.log(this.formGroup.value);
+    console.log('save: ',this.formGroup.value);
 
     let user = {
       name : this.formGroup.controls['name'].value,
       sharedKey : this.formGroup.controls['name'].value, // lo dejo con el mismo nombre
       phone: this.formGroup.controls['phone'].value,
       email : this.formGroup.controls['email'].value,
-      businessId: this.formGroup.controls['email'].value,
+      businessId: this.formGroup.controls['businessId'].value,
       dateStart: this.formGroup.controls['dateStart'].value,
       dateEnd: this.formGroup.controls['dateEnd'].value,
     }
 
-    this.clientService.postClient(user!).subscribe( resp => {
+    this.clientService.postClient(user).subscribe( resp => {
       console.log(resp)
-      this.emitirClienteComponent();
-    })
+      this.onNoClick();
+    });
+  }
 
-    
-
+  editClient(){
+    this.formGroup.value;
+    console.log(this.data)
+    if(this.data){
+      let user = {
+        id : this.data.id,
+        name : this.formGroup.controls['name'].value,
+        sharedKey : this.formGroup.controls['name'].value, // lo dejo con el mismo nombre
+        phone: this.formGroup.controls['phone'].value,
+        email : this.formGroup.controls['email'].value,
+        businessId: this.formGroup.controls['businessId'].value,
+        dateStart: this.formGroup.controls['dateStart'].value,
+        dateEnd: this.formGroup.controls['dateEnd'].value,
+      }
+  
+      this.clientService.putClient(user).subscribe(resp => {
+        console.log(resp),
+        this.onNoClick();
+      })
+    }else{
+      this.creatPost();
+    }
   }
 
 }

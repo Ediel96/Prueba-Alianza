@@ -34,5 +34,10 @@ export class ClientService {
     return this.http.post(this.urlEndPoint, user, { headers: this.agregaAuthorizationHeader() });
   }
 
+  putClient(user : any){
+    console.log({user})
+    return this.http.put(`${this.urlEndPoint}/${user.id}`, user, { headers: this.agregaAuthorizationHeader() });
+  }
+
   
 }
