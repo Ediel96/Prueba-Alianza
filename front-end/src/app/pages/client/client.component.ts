@@ -24,6 +24,10 @@ export class ClientComponent implements OnInit, OnChanges {
   constructor(private clientService : ClientService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.listClient();
+  }
+
+  listClient(){
     this.clientService.getLlistaClients().subscribe((res : any)   => {
       console.log(res),
       this.listUser = res['user'];
@@ -41,8 +45,8 @@ export class ClientComponent implements OnInit, OnChanges {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      console.log(result)
+      this.listClient();
     });
   }
 
@@ -54,8 +58,8 @@ export class ClientComponent implements OnInit, OnChanges {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      console.log(result)
+      this.listClient();
     });
   }
 
