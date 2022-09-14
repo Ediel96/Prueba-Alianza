@@ -29,10 +29,10 @@ export class ClientComponent implements OnInit {
 
   listClient(){
     this.clientService.getLlistaClients().subscribe((res : any)   => {
-      console.log(res),
       this.listUser = res['user'];
     });
   }
+
 
   addItem(event : any){
     const dialogRef = this.dialog.open(DialogModal, {
@@ -41,7 +41,6 @@ export class ClientComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       this.listClient();
     });
   }
@@ -54,7 +53,6 @@ export class ClientComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       this.listClient();
     });
   }
@@ -65,7 +63,7 @@ export class ClientComponent implements OnInit {
   selector: 'dialog-modal',
   templateUrl: 'dialog-modal.html',
 })
-export class DialogModal implements OnChanges, OnInit{
+export class DialogModal implements OnInit{
 
   formGroup!: FormGroup;
   titleAlert: string = 'This field is required';
@@ -82,7 +80,6 @@ export class DialogModal implements OnChanges, OnInit{
   ngOnInit(): void {
     this.createForm();
     if(this.data != null){
-      console.log(this.data);
       this.editForm(this.data)
     }
   }
@@ -110,10 +107,6 @@ export class DialogModal implements OnChanges, OnInit{
   }
 
 
-  ngOnChanges(): void {
-    console.log('ngOnChanges: ',this.data);
-  }
-
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -124,7 +117,6 @@ export class DialogModal implements OnChanges, OnInit{
   
   creatPost(){
     this.formGroup.value;
-    console.log('save: ',this.formGroup.value);
 
     let user = {
       name : this.formGroup.controls['name'].value,
@@ -137,14 +129,12 @@ export class DialogModal implements OnChanges, OnInit{
     }
 
     this.clientService.postClient(user).subscribe( resp => {
-      console.log(resp)
       this.onNoClick();
     });
   }
 
   editClient(){
     this.formGroup.value;
-    console.log(this.data)
     if(this.data){
       let user = {
         id : this.data.id,
@@ -158,7 +148,6 @@ export class DialogModal implements OnChanges, OnInit{
       }
   
       this.clientService.putClient(user).subscribe(resp => {
-        console.log(resp),
         this.onNoClick();
       })
     }else{
