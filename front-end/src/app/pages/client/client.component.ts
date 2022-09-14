@@ -13,7 +13,7 @@ import { __values } from 'tslib';
   styleUrls: ['./client.component.css']
 })
 
-export class ClientComponent implements OnInit, OnChanges {
+export class ClientComponent implements OnInit {
 
   listUser!: User[]; 
   animal!: string;
@@ -32,10 +32,6 @@ export class ClientComponent implements OnInit, OnChanges {
       console.log(res),
       this.listUser = res['user'];
     });
-  }
-
-  ngOnChanges(): void {
-    console.log('que paso perro');
   }
 
   addItem(event : any){
