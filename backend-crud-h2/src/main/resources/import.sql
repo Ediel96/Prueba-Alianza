@@ -1,0 +1,5 @@
+-- INSERT INTO USERS ( BUSINESS_ID, DATE_END, DATE_START, EMAIL, PHONE, SHARED_KEY )
+-- VALUES ('business id', '2022-09-10', '2022-09-10', 'email@gmail.com', '124006', 'Norway');
+--
+-- INSERT INTO USERS ( BUSINESS_ID, DATE_END, DATE_START, EMAIL, PHONE, SHARED_KEY )
+-- VALUES ('business id', '2022-09-10', '2022-09-10', 'email@gmail.com', '124006', 'Norway');
